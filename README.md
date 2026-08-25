@@ -1,16 +1,43 @@
-## Paper
+## Independent lab: Apple Neural Engine systems and weight-space optimization
 
-**Every Cycle Counts: A Self-Correcting Cognitive Architecture on Heterogeneous Consumer Silicon**
-[arXiv link pending]
+Two benches. Apple Silicon systems work (Neural Engine reverse engineering, on-device
+inference, memory subsystems) on a Mac; weight-space optimization science on a Linux GPU
+box. Measured numbers with disclosed conditions, preregistered bars where the work is
+experimental, and negative results reported as the bottom line.
 
-83% system extraction recall · 100% cross-session continuity · -4.7% cross-accelerator contention
-All on a single M5 Pro laptop, 64GB unified memory. No cloud dependency.
+### Weight-space optimization
 
-### Repos supporting this paper:
+- [gradient-bridges](https://github.com/MidasMulli/gradient-bridges): construct a working
+  LoRA adapter for a never-trained task from the mean of other tasks' adapters plus one
+  gradient at the untrained init. Leave-one-out panels, matched controls at 0/96, and a
+  second-family replication (Llama-3.1-8B, 96/96). Status: candidate, one lab.
 
-- **[subconscious](https://github.com/MidasMulli/subconscious)** — Self-correcting cognitive memory architecture (Sections 4-5)
-- **[ane-dispatch](https://github.com/MidasMulli/ane-dispatch)** — Direct Neural Engine dispatch + SharedEvents (Section 3.3)
-- **[ane-compiler](https://github.com/MidasMulli/ane-compiler)** — ANE model compilation pipeline (Section 3.1)
-- **[apple-slc-cache-hints](https://github.com/MidasMulli/apple-slc-cache-hints)** — SLC cache characterization on Apple Silicon
-- **[ane-toolkit](https://github.com/MidasMulli/ane-toolkit)** — H17 binary format specification + PWL deployment
-- **[four-path-mlx](https://github.com/MidasMulli/four-path-mlx)** — Heterogeneous speculative decoding on Apple Silicon
+### Apple Neural Engine: measurement and internals
+
+- [ane-perf](https://github.com/MidasMulli/ane-perf): an IOReport-histogram method for ANE
+  DRAM bandwidth, a three-zone SRAM model with a cliff at 32 MB, and a controlled
+  refutation of "conv is faster than matmul on ANE". Every finding carries its conditions
+  and a named repro.
+- [beefface](https://github.com/MidasMulli/beefface): byte-level specification of Apple's
+  compiled ANE container, a working binary patcher verified against hardware output, and a
+  deterministic hardware LUT fingerprint.
+- [ane-toolkit](https://github.com/MidasMulli/ane-toolkit): compile a Python float
+  function into a piecewise-linear chain that runs on the ANE's hardware activation tables.
+- [ane-dispatch](https://github.com/MidasMulli/ane-dispatch): direct ANE dispatch through
+  the private client API, with functional ANE SharedEvents and an ANE-GPU bridge.
+
+### Apple Silicon inference and memory
+
+- [ane-mutable-adapters](https://github.com/MidasMulli/ane-mutable-adapters): hot-swap
+  LoRA adapters over a frozen resident base on the ANE via mutable-weight files.
+- [four-path-mlx](https://github.com/MidasMulli/four-path-mlx): multi-source speculative
+  decoding for MLX. Measured 1 to 4.6x on financial-document tasks, about 1x on novel text.
+  Archived.
+- [inference-across-metal](https://github.com/MidasMulli/inference-across-metal):
+  mmap-streaming a 14 GB model on a 16 GB Apple Silicon machine, with the kernel-level
+  findings that made it work.
+- [gdn-coreml](https://github.com/MidasMulli/gdn-coreml): a GatedDeltaNet checkpoint
+  converted to CoreML for ANE draft decode. Measured result on the owned hardware is 0.94x,
+  reported as the bottom line.
+
+Full repo list is below the pinned set. Corrections via issue are welcome on any repo.
