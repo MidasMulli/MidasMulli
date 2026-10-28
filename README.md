@@ -1,43 +1,32 @@
-## Independent lab: Apple Neural Engine systems and weight-space optimization
+## Independent lab: neuromorphic learning, predictive memory and ML systems
 
-Two benches. Apple Silicon systems work (Neural Engine reverse engineering, on-device
-inference, memory subsystems) on a Mac; weight-space optimization science on a Linux GPU
-box. Measured numbers with disclosed conditions, preregistered bars where the work is
-experimental, and negative results reported as the bottom line.
+I build and test small systems across BrainChip AKD1500, Jetson/NVIDIA and Apple Silicon. The aim is useful capability with inspectable evidence: matched controls, conditions stated, failures preserved and a clear line between measured results and the next idea.
 
-### Weight-space optimization
+### Native learning and predictive memory
 
-- [gradient-bridges](https://github.com/MidasMulli/gradient-bridges): construct a working
-  LoRA adapter for a never-trained task from the mean of other tasks' adapters plus one
-  gradient at the untrained init. Leave-one-out panels, matched controls at 0/96, and a
-  second-family replication (Llama-3.1-8B, 96/96). Status: candidate, one lab.
+- [akd1500-lab](https://github.com/MidasMulli/akd1500-lab): native learning, connected memory and an interactive Network Explorer. Recent work connects AKD memory to a frozen world model on the Nano. Repeated-context corrections work; generalization and native memory allocation remain open. Recorded data, controls, videos and limits are indexed in the repo.
 
-### Apple Neural Engine: measurement and internals
+### Apple Neural Engine: internals and instruments
 
-- [ane-perf](https://github.com/MidasMulli/ane-perf): an IOReport-histogram method for ANE
-  DRAM bandwidth, a three-zone SRAM model with a cliff at 32 MB, and a controlled
-  refutation of "conv is faster than matmul on ANE". Every finding carries its conditions
-  and a named repro.
-- [beefface](https://github.com/MidasMulli/beefface): byte-level specification of Apple's
-  compiled ANE container, a working binary patcher verified against hardware output, and a
-  deterministic hardware LUT fingerprint.
-- [ane-toolkit](https://github.com/MidasMulli/ane-toolkit): compile a Python float
-  function into a piecewise-linear chain that runs on the ANE's hardware activation tables.
-- [ane-dispatch](https://github.com/MidasMulli/ane-dispatch): direct ANE dispatch through
-  the private client API, with functional ANE SharedEvents and an ANE-GPU bridge.
+- [beefface](https://github.com/MidasMulli/beefface): compiled-container specification, hardware-checked binary patching and a deterministic lookup-table fingerprint.
+- [ane-toolkit](https://github.com/MidasMulli/ane-toolkit): PWL activation-table tools and custom activation deployment.
+- [ane-perf](https://github.com/MidasMulli/ane-perf): IOReport bandwidth measurement and SRAM/dispatch characterization. Conditions and shared prior art are stated in the repo.
+- [ane-dispatch](https://github.com/MidasMulli/ane-dispatch) and [ane-compiler](https://github.com/MidasMulli/ane-compiler): private dispatch and MIL compilation tools. These use Apple's private/CoreML paths, not a CoreML bypass.
+- [ane-mutable-adapters](https://github.com/MidasMulli/ane-mutable-adapters): mutable LoRA adapters over a frozen resident base.
+- [kev-ane](https://github.com/MidasMulli/kev-ane): a small decision model on the ANE, with the gates used to verify it.
 
-### Apple Silicon inference and memory
+### Inference, memory and hardware behavior
 
-- [ane-mutable-adapters](https://github.com/MidasMulli/ane-mutable-adapters): hot-swap
-  LoRA adapters over a frozen resident base on the ANE via mutable-weight files.
-- [four-path-mlx](https://github.com/MidasMulli/four-path-mlx): multi-source speculative
-  decoding for MLX. Measured 1 to 4.6x on financial-document tasks, about 1x on novel text.
-  Archived.
-- [inference-across-metal](https://github.com/MidasMulli/inference-across-metal):
-  mmap-streaming a 14 GB model on a 16 GB Apple Silicon machine, with the kernel-level
-  findings that made it work.
-- [gdn-coreml](https://github.com/MidasMulli/gdn-coreml): a GatedDeltaNet checkpoint
-  converted to CoreML for ANE draft decode. Measured result on the owned hardware is 0.94x,
-  reported as the bottom line.
+- [ngram-engine](https://github.com/MidasMulli/ngram-engine): MLX speculative-decoding server with an N-gram drafter and prefix KV cache.
+- [inference-across-metal](https://github.com/MidasMulli/inference-across-metal): model streaming and custom Metal kernels on a memory-limited Mac.
+- [dual-path-inference](https://github.com/MidasMulli/dual-path-inference), [apple-slc-cache-hints](https://github.com/MidasMulli/apple-slc-cache-hints) and [gdn-coreml](https://github.com/MidasMulli/gdn-coreml): heterogeneous execution, cache hints and a converter with its negative measured result preserved.
+- [subconscious](https://github.com/MidasMulli/subconscious), [cognitive-stack-ane (Orion)](https://github.com/MidasMulli/cognitive-stack-ane) and [phantom-memory](https://github.com/MidasMulli/phantom-memory): local-agent memory systems and experiments.
+- [drift-probe-cpu](https://github.com/MidasMulli/drift-probe-cpu): induced/out-of-distribution hidden-state drift detection, not a claim to detect organic hallucinations.
+- [tcprobe](https://github.com/MidasMulli/tcprobe): NVIDIA GB10 tensor-core instruction probes. Read its corrections before interpreting historical rates.
 
-Full repo list is below the pinned set. Corrections via issue are welcome on any repo.
+### Weight-space research and historical work
+
+- [gradient-bridges](https://github.com/MidasMulli/gradient-bridges): candidate LoRA construction from other task adapters plus one gradient. One lab; external replication remains open.
+- [four-path-mlx](https://github.com/MidasMulli/four-path-mlx): archived heterogeneous speculative-decoding experiments. Historical measurements remain available.
+
+Start with the pinned projects or browse the full repository list. Corrections and independent replications are welcome.
