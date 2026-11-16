@@ -1,6 +1,20 @@
-## Independent lab: neuromorphic learning, predictive memory and ML systems
+## Independent lab: learning on real edge hardware
 
-I build and test small systems across BrainChip AKD1500, Jetson/NVIDIA and Apple Silicon. The aim is useful capability with inspectable evidence: matched controls, conditions stated, failures preserved and a clear line between measured results and the next idea.
+I study learning and inference on BrainChip's AKD1500 and Apple's Neural Engine, alongside camera-based MechDog experiments. I publish what ran, which work happened on the host or chip, and where the evidence stops.
+
+**[Lab notebook](https://midasmulli.github.io/lab-notebook/)** · **[X @NickLo641579](https://x.com/NickLo641579)**
+
+### Latest from the notebook
+
+<a href="https://midasmulli.github.io/lab-notebook/entries/2026-11-16-akd1500-label-free-atlas/"><img src="https://midasmulli.github.io/lab-notebook/assets/akd-atlas-live/preview.gif" width="420" alt="Sped-up preview of the recorded AKD1500 learning and scoring take"></a>
+
+Sped-up preview; the notebook contains the full real-time take.
+
+- **[An AKD1500 learned a cell-profile memory without labels, filmed live](https://midasmulli.github.io/lab-notebook/entries/2026-11-16-akd1500-label-free-atlas/)** (2026-11-16): 8,192 unlabelled profiles; 60 source labels for a host readout; 9,511 cells from another mouse at 63.6–69.0% balanced agreement, versus 18.3–23.1% for untrained memory.
+- **[A decision model on the Neural Engine, and the test that a broken port still passes](https://midasmulli.github.io/lab-notebook/entries/2026-09-22-kev-on-the-neural-engine/)** (2026-09-22): 7.16 ms median at 64 tokens; first-question decisions matching the reference on 155 records.
+- **[Swapping adapters on the Neural Engine: why a clean bind is not enough](https://midasmulli.github.io/lab-notebook/entries/2026-08-27-adapters-operator-form/)** (August 2026 experiments): a deployed glyph adapter and separate tests of export form, warm swapping and output fidelity, with each build identified.
+
+The aim is useful capability with inspectable evidence: matched controls, stated conditions, preserved failures and a clear line between measurements and the next idea.
 
 ### Native learning and predictive memory
 
